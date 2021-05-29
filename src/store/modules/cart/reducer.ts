@@ -1,7 +1,9 @@
+// O reducer é o ponto principal de um estado, no caso o cart, ele determina quais as informações que vão estar contidas no estado
 import { Reducer } from "redux";
 import produce from "immer";
 import { ActionTypes, ICartState } from "./types";
 
+// Informações do estado
 const INITIAL_STATE: ICartState = {
   items: [],
   failedStockCheck: [],

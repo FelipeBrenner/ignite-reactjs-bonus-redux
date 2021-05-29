@@ -8,6 +8,7 @@ import Cart from "./components/Cart";
 
 function App() {
   return (
+    // Contexto, no qual o store é provido para todos os componentes de dentro
     <Provider store={store}>
       <Catalog />
       <Cart />

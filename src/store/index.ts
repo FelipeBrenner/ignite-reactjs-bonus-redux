@@ -16,6 +16,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [sagaMiddleware];
 
+// Função principal, chamada uma vez
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(...middlewares))

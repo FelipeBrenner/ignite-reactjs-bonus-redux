@@ -16,6 +16,60 @@ Repositório criado para estudo do Redux, biblioteca JavaScript pra gerenciament
 - Essas bibliotecas criadas então para controle de estado fazem com que seja possível um controle melhor sobre a granularidade dos dados, é possível ter um estado complexo onde vários outros componentes dependem daquela informação em si e atualizá-lo e obter informações dele de uma forma muito mais imutável.
 - O Redux implementou dentro do React a arquitetura Flux, a qual perdeu ultimamente relevância no mercado principalmente por ter um alto nível de complexidade para aplicar, mas é indispensável o estudo, pois a maioria das aplicações React do mercado ainda vão estar utilizando Redux por um bom tempo. O Redux não é ruim, só é apenas muito complexo para resolver coisas as vezes muito simples.
 
-## 🚀 Funções
+## 🚀 Código e explicações
 
-`createStore from 'Redux'`: função principal, chamada uma vez, utilizada como parâmetro no `Provider from 'react-redux`, que é um contexto que fica por volta de tudo no arquivo principal `App`.
+### <strong>src/store/index.tsx<strong>
+
+```ts
+import { applyMiddleware, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+
+import createSagaMiddleware from "redux-saga";
+
+import { ICartState } from "./modules/cart/types";
+
+import rootReducer from "./modules/rootReducer";
+import rootSaga from "./modules/rootSaga";
+
+export interface IState {
+  cart: ICartState;
+}
+
+const sagaMiddleware = createSagaMiddleware();
+
+const middlewares = [sagaMiddleware];
+
+// Função principal, chamada uma vez
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(...middlewares))
+);
+
+sagaMiddleware.run(rootSaga);
+
+export default store;
+```
+
+### <strong>src/App.tsx<strong>
+
+```ts
+import React from "react";
+import { Provider } from "react-redux";
+
+import store from "./store";
+
+import Catalog from "./components/Catalog";
+import Cart from "./components/Cart";
+
+function App() {
+  return (
+    // Contexto, no qual o store é provido para todos os componentes de dentro
+    <Provider store={store}>
+      <Catalog />
+      <Cart />
+    </Provider>
+  );
+}
+
+export default App;
+```
