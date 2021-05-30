@@ -13,11 +13,14 @@ interface CatalogItemProps {
 const CatalogItem: React.FC<CatalogItemProps> = ({ product }) => {
   const dispatch = useDispatch();
 
+  // useSelector busca as informações do estado
   const hasFailedStockCheck = useSelector<IState, boolean>((state) => {
     return state.cart.failedStockCheck.includes(product.id);
   });
 
   const handleAddProductToCart = useCallback(() => {
+    /* Simplesmente chamar a função addProductToCartRequest() vai só retornar o conteúdo que ela tem no seu 
+    return, por isso deve ser usado o dispatch */
     dispatch(addProductToCartRequest(product));
   }, [dispatch, product]);
 

@@ -1,4 +1,5 @@
 import { applyMiddleware, createStore } from "redux";
+// Extensão do navegador para debugar as ações do redux
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import createSagaMiddleware from "redux-saga";
@@ -12,6 +13,7 @@ export interface IState {
   cart: ICartState;
 }
 
+// Middleware é um interceptador executado no meio da action e do reducer
 const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [sagaMiddleware];

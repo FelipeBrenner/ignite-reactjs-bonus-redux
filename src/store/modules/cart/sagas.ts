@@ -19,6 +19,7 @@ interface IStockResponse {
 function* checkProductStock({ payload }: CheckProductStockRequest) {
   const { product } = payload;
 
+  // O select serve para buscar informações do estado
   const currentQuantity: number = yield select((state: IState) => {
     return (
       state.cart.items.find((item) => item.product.id === product.id)
@@ -32,6 +33,8 @@ function* checkProductStock({ payload }: CheckProductStockRequest) {
   );
 
   if (availableStockResponse.data.quantity > currentQuantity) {
+    /* O put é a mesma coisa que o dispatch, serve para disparar uma ação. Todo método que vem do saga
+    precisa ter o yield na frente. */
     yield put(addProductToCartSuccess(product));
   } else {
     yield put(addProductToCartFailure(product.id));
@@ -39,5 +42,9 @@ function* checkProductStock({ payload }: CheckProductStockRequest) {
 }
 
 export default all([
+  /* O takeLatest houve a última ação executada a ser interceptada antes do reducer.
+   Existe o takeEvery também, mas aí como a função checkProductStock é assincrona, se fosse clicado em 
+   comprar várias vezes enquanto ela estava processando, seria disparado todas as vezes, e não somente 
+   a última. */
   takeLatest(ActionTypes.addProductToCartRequest, checkProductStock),
 ]);
