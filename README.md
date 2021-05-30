@@ -172,6 +172,26 @@ Print para mostrar a execução utilizada para estudar e aplicar esses conceitos
 
 <img alt="print" title="print" src=".github/print.png">
 
+## ⚙ Clone
+
+```bash
+# Abra um terminal e copie este repositório com o comando
+$ git clone https://github.com/FelipeBrenner/ignite-reactjs-bonus-redux.git
+
+# Acesse a pasta da aplicação
+$ cd ignite-reactjs-bonus-redux
+
+# Instale as dependências
+$ yarn
+
+# Inicie o json com informações pré definidas dos produtos e estoque
+$ yarn server
+
+# Inicie a aplicação
+$ yarn dev
+
+```
+
 ---
 
 Por Felipe Brenner
