@@ -166,6 +166,10 @@ export default async function rootSaga(): any {
 }
 ```
 
+## 📷 Execução
+
+Print para mostrar a execução utilizada para estudar e aplicar esses conceitos e a extensão para debugar as ações do Redux
+
 <img alt="print" title="print" src=".github/print.png">
 
 ---
